@@ -3,6 +3,7 @@
 
 import * as React from 'react'
 import {Switch} from '../switch'
+import warning from 'warning'
 
 const callAll =
   (...fns) =>
@@ -43,9 +44,7 @@ function useToggle({
 
   const hasOnChange = Boolean(onChange)
   React.useEffect(() => {
-    if(!hasOnChange && onIsControlled && !readOnly) {
-      console.error('Something bad')
-    }
+    warning(!(!hasOnChange && onIsControlled && !readOnly), 'Something bad')
   },[hasOnChange, onIsControlled, readOnly])
 
   function dispatchWithOnChange(action) {
